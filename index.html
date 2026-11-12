@@ -56,12 +56,12 @@
     border-bottom:1px solid var(--panel-border);
   }
   .nav-name{font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem; color:var(--text);}
-  .nav-links{display:flex; gap:1.8rem; list-style:none; font-size:0.9rem;}
+  .nav-links{display:flex; gap:1.6rem; list-style:none; font-size:0.9rem;}
   .nav-links a{color:var(--text-muted);}
   .nav-links a:hover{color:var(--hot-1); text-decoration:none;}
   .nav-toggle{display:none; background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;}
 
-  @media (max-width:760px){
+  @media (max-width:900px){
     .nav-links{
       position:fixed; top:64px; right:0; left:0;
       flex-direction:column; gap:0;
@@ -69,7 +69,7 @@
       border-bottom:1px solid var(--panel-border);
       max-height:0; overflow:hidden; transition:max-height 0.3s ease;
     }
-    .nav-links.open{max-height:400px;}
+    .nav-links.open{max-height:520px;}
     .nav-links a{display:block; padding:1rem 6vw; border-top:1px solid var(--panel-border);}
     .nav-toggle{display:block;}
   }
@@ -80,6 +80,7 @@
     padding:7rem 6vw 6rem;
     overflow:hidden;
     border-bottom:1px solid var(--panel-border);
+    max-width:none;
   }
   #grid-canvas{
     position:absolute; inset:0;
@@ -110,6 +111,17 @@
     color:var(--text-muted);
     max-width:620px;
   }
+  .hero-badge{
+    display:inline-flex; align-items:center; gap:0.55rem;
+    margin-top:1.4rem;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    color:var(--text);
+    padding:0.45rem 0.85rem;
+    border:1px solid rgba(242,153,74,0.4);
+    border-radius:3px;
+    background:rgba(242,153,74,0.07);
+  }
+  .hero-badge::before{content:''; width:7px; height:7px; border-radius:50%; background:var(--hot-1);}
   .hero-cta{
     margin-top:2.2rem;
     display:flex; flex-wrap:wrap; gap:0.9rem;
@@ -136,11 +148,17 @@
   section.wide{max-width:1120px;}
   .section-head{margin-bottom:2.6rem;}
   .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem); color:var(--text);}
+  .sub-head{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; text-transform:uppercase;
+    letter-spacing:0.1em; color:var(--cool); margin:2.4rem 0 1rem;
+  }
+  .sub-head:first-of-type{margin-top:0;}
 
   /* ---------- About ---------- */
   #about p{color:var(--text-muted); font-size:1.05rem; max-width:720px;}
+  #about p + p{margin-top:1rem;}
 
-  /* ---------- Experience timeline ---------- */
+  /* ---------- Timeline ---------- */
   .timeline{border-left:1px solid var(--panel-border); padding-left:2.2rem; display:flex; flex-direction:column; gap:3rem;}
   .timeline-item{position:relative;}
   .timeline-item::before{
@@ -152,6 +170,8 @@
   .timeline-date{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--hot-1); letter-spacing:0.04em;}
   .timeline-item h3{font-size:1.25rem; margin-top:0.4rem; color:var(--text);}
   .timeline-org{color:var(--cool); font-size:0.92rem; margin-top:0.15rem; font-family:'IBM Plex Mono', monospace;}
+  .timeline-advisor{color:var(--text-faint); font-size:0.86rem; margin-top:0.2rem; font-style:italic;}
+  .timeline-item p.timeline-note{color:var(--text-muted); margin-top:0.8rem; font-size:0.95rem;}
   .timeline-item ul{margin-top:1rem; padding-left:1.1rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.55rem;}
   .timeline-item li::marker{color:var(--hot-1);}
 
@@ -175,23 +195,41 @@
     transition:border-color 0.2s ease, transform 0.15s ease;
   }
   .project-card:hover{border-color:var(--cool); transform:translateY(-2px);}
+  .project-card.featured{border-color:rgba(242,153,74,0.45);}
   .project-tag{
     font-family:'IBM Plex Mono', monospace; font-size:0.7rem; text-transform:uppercase;
     letter-spacing:0.06em; color:var(--cool);
   }
+  .project-card.featured .project-tag{color:var(--hot-1);}
   .project-card h3{font-size:1.08rem; color:var(--text); line-height:1.3;}
   .project-card p{color:var(--text-muted); font-size:0.9rem;}
   .project-link{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; margin-top:0.2rem;}
 
+  /* ---------- Honors ---------- */
+  .honors-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:1.3rem;}
+  .honor-card{
+    background:var(--panel); border:1px solid var(--panel-border); border-radius:6px;
+    padding:1.6rem; display:flex; flex-direction:column; gap:0.6rem;
+  }
+  .honor-rank{font-family:'Fraunces', serif; font-size:2rem; line-height:1; font-weight:600;
+    background:linear-gradient(100deg, var(--hot-1), var(--hot-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .honor-card h3{font-size:1.05rem; color:var(--text); line-height:1.3;}
+  .honor-card p{color:var(--text-muted); font-size:0.9rem;}
+  .mini-list{list-style:none; display:flex; flex-direction:column; gap:0.7rem;}
+  .mini-list li{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+    padding-bottom:0.7rem; border-bottom:1px solid var(--panel-border); color:var(--text-muted); font-size:0.94rem;}
+  .mini-list li span:last-child{font-family:'IBM Plex Mono', monospace; font-size:0.8rem; color:var(--text-faint);}
+
   /* ---------- Publications ---------- */
   .pub-list{display:flex; flex-direction:column;}
   .pub-item{
-    padding:1.3rem 0; border-bottom:1px solid var(--panel-border);
+    padding:1.2rem 0; border-bottom:1px solid var(--panel-border);
     display:flex; flex-direction:column; gap:0.3rem;
   }
   .pub-item:first-child{padding-top:0;}
   .pub-item p{color:var(--text); font-size:0.98rem;}
   .pub-item .pub-venue{color:var(--text-muted); font-size:0.86rem; font-family:'IBM Plex Mono', monospace;}
+  .pub-status{color:var(--hot-1);}
   .pub-note{color:var(--text-faint); font-size:0.85rem; margin-top:2rem;}
 
   /* ---------- Contact ---------- */
@@ -217,10 +255,12 @@
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#honors">Honors</a></li>
+    <li><a href="#skills">Skills</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#publications">Publications</a></li>
+    <li><a href="#talks">Talks</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -228,10 +268,10 @@
 <section class="hero">
   <canvas id="grid-canvas"></canvas>
   <div class="hero-inner">
-    <span class="eyebrow">AI/ML Scientist · Medical Imaging · Data Science</span>
+    <span class="eyebrow">AI/ML Scientist · Medical Imaging · Medical Physics</span>
     <h1>Lopamudra Nayak, <span class="accent">PhD</span></h1>
-    <p class="hero-role">Foundation models · Deep learning · Multimodal imaging · Predictive modeling — CT · PET · MRI</p>
-    <p class="hero-desc">AI/ML scientist at Memorial Sloan Kettering Cancer Center developing and fine-tuning deep-learning models for medical image segmentation, registration, and quantitative biomarker extraction. Background in experimental particle physics, statistical modeling, Monte Carlo simulation, and large-scale data analysis.</p>
+    <p class="hero-role">Deep learning · Deformable registration · Segmentation · Imaging biomarkers — CT · PET · MRI</p>
+    <p class="hero-desc">Research Fellow in AI/ML Medical Imaging &amp; Predictive Informatics at Memorial Sloan Kettering Cancer Center, building deep-learning pipelines for deformable image registration, tumor segmentation, and quantitative imaging biomarkers that inform adaptive radiotherapy. PhD in experimental particle physics.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="https://www.linkedin.com/in/lopamudra-nayak-phd-3190731ab/" target="_blank" rel="noopener">Get in touch</a>
       <a class="btn" href="Nayak_Resume.pdf">Download CV</a>
@@ -245,100 +285,71 @@
     <span class="eyebrow">01 / About</span>
     <h2>Background</h2>
   </div>
-  <p>Lopamudra is an AI/ML scientist and research associate at Memorial Sloan Kettering Cancer Center with expertise in multimodal medical imaging, deep learning, quantitative image analysis, and predictive modeling. Her work focuses on developing scalable pipelines for CT, PET, and MRI; fine-tuning pretrained models for image registration and segmentation; extracting anatomical, metabolic, and deformation-based biomarkers; and integrating imaging features with clinical outcomes for treatment-response assessment. Her PhD research in experimental high-energy physics provided extensive experience in Python/C++, supervised machine learning, Monte Carlo simulation, statistical estimation, uncertainty quantification, and analysis of large-scale experimental datasets.</p>
+  <p>Lopamudra is a Research Fellow at Memorial Sloan Kettering Cancer Center, working on AI/ML for multimodal medical imaging and predictive informatics. She applies deep learning-based deformable image registration, including a 3D convolutional LSTM U-Net, to track longitudinal tumor volume and anatomical change in head and neck and lung cancer patients, and turns those changes into quantitative imaging biomarkers and predictive models of treatment response for adaptive radiotherapy.</p>
+  <p>Her PhD in experimental particle physics at IIT Hyderabad and the Belle II Collaboration (KEK, Japan) built deep experience in terabyte-scale data analysis, Monte Carlo simulation, maximum-likelihood estimation, and uncertainty quantification.</p>
 </section>
 
 <section id="experience">
   <div class="section-head">
     <span class="eyebrow">02 / Experience</span>
-    <h2>Research &amp; data science experience</h2>
+    <h2>Research experience</h2>
   </div>
   <div class="timeline">
     <div class="timeline-item">
       <span class="timeline-date">NOV 2023 — PRESENT</span>
-      <h3>Research Associate, AI/ML Medical Imaging &amp; Predictive Informatics</h3>
+      <h3>Research Fellow, AI/ML Medical Imaging &amp; Predictive Informatics</h3>
       <div class="timeline-org">Memorial Sloan Kettering Cancer Center, New York, NY</div>
       <ul>
-        <li>Develop AI/ML solutions for multimodal and longitudinal medical imaging using CT, PET, and MRI.</li>
-        <li>Build end-to-end medical imaging pipelines for preprocessing, image registration, segmentation, quantitative feature extraction, model training, and validation.</li>
-        <li>Fine-tune and train deep-learning models for longitudinal image analysis using PyTorch and MONAI.</li>
-        <li>Extract quantitative imaging biomarkers from anatomical, metabolic, and deformation-based features.</li>
-        <li>Develop predictive models using imaging biomarkers and clinical outcomes for treatment-response assessment.</li>
-        <li>Collaborate with radiation oncologists, medical physicists, and researchers to translate imaging-based models toward personalized and adaptive radiotherapy.</li>
+        <li>Applied a deep learning-based deformable image registration framework incorporating a 3D convolutional LSTM U-Net to track longitudinal tumor volume and anatomical changes in patients with head and neck and lung cancers for adaptive treatment planning.</li>
+        <li>Developed medical imaging analysis pipelines integrating multimodal image preprocessing, deformable image registration, tumor segmentation, quantitative feature extraction, and deep learning model training and validation.</li>
+        <li>Computed quantitative imaging biomarkers and developed predictive models to evaluate treatment response and predict outcomes in patients with head and neck and lung cancers.</li>
+        <li>Collaborated with radiation oncologists and medical physicists.</li>
       </ul>
     </div>
 
     <div class="timeline-item">
       <span class="timeline-date">2018 — 2023</span>
-      <h3>PhD Research Scientist (Data Analyst), Physics &amp; Data Science</h3>
-      <div class="timeline-org">Belle II Collaboration (KEK, Japan) / Indian Institute of Technology Hyderabad</div>
+      <h3>PhD Research Scientist, Physics and Data Science</h3>
+      <div class="timeline-org">Indian Institute of Technology Hyderabad, India / Belle II Collaboration (KEK, Japan)</div>
       <ul>
-        <li>Analyzed large-scale experimental datasets from the Belle and Belle II collaborations, focusing on data-driven studies in high-energy physics.</li>
-        <li>Applied Python and C++ for data processing, statistical analysis, Monte Carlo simulation, feature engineering, supervised machine learning, hyperparameter optimization, and data visualization.</li>
-        <li>Built and validated statistical models to extract signals, evaluate uncertainties, and support quantitative decision-making from complex, high-dimensional datasets.</li>
-        <li>Performed data-quality checks and calibration by comparing Monte Carlo simulations with real experimental data to identify discrepancies and ensure data reliability.</li>
-        <li>Worked with distributed computing environments and large datasets as part of an international scientific collaboration.</li>
-        <li>Communicated analytical findings through collaboration meetings, technical presentations, international conferences, and peer-reviewed publications.</li>
+        <li>Developed computational frameworks for particle reconstruction, signal-background discrimination, and multivariate analysis of high-dimensional, terabyte-scale experimental datasets using distributed computing resources.</li>
+        <li>Generated large-scale Monte Carlo simulations for signal and background modeling; performed maximum-likelihood estimation, statistical uncertainty analysis, and systematic studies to evaluate measurement precision and reliability.</li>
+        <li>Completed 904 hours of detector operations over five years, monitoring detector performance, data acquisition, operational conditions, and real-time data quality.</li>
+        <li>Served as a detector expert for the Time-of-Propagation (TOP) Cherenkov detector, evaluating particle identification efficiencies, misidentification rates, and data–Monte Carlo agreement to validate detector performance.</li>
+        <li>Presented research findings within an international collaboration of over 1,000 scientists, mentored junior researchers, and contributed to peer-reviewed scientific publications.</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="section-head">
-    <span class="eyebrow">03 / Skills</span>
-    <h2>Technical toolkit</h2>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <h3>AI &amp; Foundation Models</h3>
-      <p>Fine-tuning pretrained foundation models, transfer learning, self-supervised learning, GANs, Vision Transformers, nnU-Net, U-Net, 3D Conv-LSTM, CNNs</p>
-    </div>
-    <div class="skill-card">
-      <h3>Medical Imaging AI</h3>
-      <p>2D/3D segmentation, multimodal registration, radiomics, quantitative imaging biomarkers, DICOM workflows, visualization, harmonization and preprocessing; CT, PET, MRI</p>
-    </div>
-    <div class="skill-card">
-      <h3>Scientific Computing</h3>
-      <p>Python, C++, SQL; PyTorch, TensorFlow, Keras, MONAI, Hugging Face, scikit-learn, scikit-survival; 3D Slicer, ITK-SNAP, ImageJ</p>
-    </div>
-    <div class="skill-card">
-      <h3>Scale &amp; Infrastructure</h3>
-      <p>Multi-GPU distributed training, HPC clusters, Docker, distributed scientific computing, large-scale experimental data processing</p>
-    </div>
-    <div class="skill-card">
-      <h3>Statistics &amp; Modeling</h3>
-      <p>Likelihood-based parametric estimation, uncertainty quantification, calibration, bias studies, hypothesis testing, survival modeling, ROC AUC</p>
-    </div>
-    <div class="skill-card">
-      <h3>Large-Scale Data &amp; Physics</h3>
-      <p>Monte Carlo simulation and validation, big-data analysis, feature engineering, supervised machine learning, detector-performance monitoring, data-quality assurance</p>
     </div>
   </div>
 </section>
 
 <section id="projects" class="wide">
   <div class="section-head">
-    <span class="eyebrow">04 / Projects</span>
+    <span class="eyebrow">03 / Projects</span>
     <h2>Selected AI &amp; data science work</h2>
   </div>
   <div class="projects-grid">
-    <div class="project-card">
-      <span class="project-tag">MICCAI FLARE 2026 · Ongoing</span>
-      <h3>Pan-Cancer CT Lesion Segmentation</h3>
-      <p>Built and containerized an nnU-Net-based whole-body cancer segmentation pipeline, including preprocessing, model training, and Tversky-augmented loss design across a 17,000+ case multi-institutional CT dataset.</p>
+    <div class="project-card featured">
+      <span class="project-tag">MICCAI 2026 · 1st place internationally</span>
+      <h3>PanSegLight: Pan-Cancer CT Lesion Segmentation</h3>
+      <p>A lightweight, containerized nnU-Net pipeline for automated tumor segmentation in CT across multiple cancer sites, trained on a 17,000+ case multi-institutional dataset and evaluated with a false-positive-weighted Tversky loss. Ranked first internationally; paper under review in Springer LNCS.</p>
     </div>
 
     <div class="project-card">
       <span class="project-tag">Longitudinal imaging · MSK</span>
-      <h3>Multimodal Imaging Biomarkers for Adaptive Radiotherapy</h3>
-      <p>Developed longitudinal CT/PET/MRI analysis workflows combining deformable image registration, quantitative feature extraction, and predictive modeling to characterize tumor regression and treatment response.</p>
+      <h3>AI-Based Deformable Registration for Adaptive Radiotherapy</h3>
+      <p>Applied a 3D convolutional LSTM U-Net registration framework to weekly imaging in head and neck and lung cancer, extracting mid-treatment changes in CT density, volume, and mass as early response biomarkers (ASTRO 2026 oral).</p>
     </div>
 
     <div class="project-card">
-      <span class="project-tag">MLHEP / Kaggle · Ranked 6th</span>
-      <h3>Detector-Data Signal Classification</h3>
-      <p>Built image-based ML classification models to separate signal from background in particle-physics detector data, with feature engineering, model optimization, and ROC-AUC evaluation.</p>
+      <span class="project-tag">PET biomarkers · MSK</span>
+      <h3>Toward PET-Guided Adaptive Radiotherapy</h3>
+      <p>Linking pre-treatment FDG PET uptake to the speed of tumor volume regression on weekly CBCT in head and neck cancer and locally advanced NSCLC, to identify patients who may benefit from adaptive replanning.</p>
+    </div>
+
+    <div class="project-card">
+      <span class="project-tag">MLHEP 2021 · 6th internationally</span>
+      <h3>Detector-Image Particle Classification &amp; Energy Prediction</h3>
+      <p>Built machine-learning models for particle classification and energy prediction from simulated CYGNO detector images in an international competition run with HSE University, EPFL, and Yandex School of Data Analysis. Awarded a Certificate of Excellence.</p>
       <a class="project-link" href="https://github.com/lophy95/mlhep_competition_2021?tab=readme-ov-file" target="_blank" rel="noopener">View repository &rarr;</a>
     </div>
 
@@ -365,68 +376,231 @@
   </div>
 </section>
 
+<section id="honors" class="wide">
+  <div class="section-head">
+    <span class="eyebrow">04 / Honors</span>
+    <h2>Awards &amp; certifications</h2>
+  </div>
+  <div class="honors-grid">
+    <div class="honor-card">
+      <span class="honor-rank">1st</span>
+      <h3>1st place internationally · MICCAI 2026 Pan-Cancer Segmentation Challenge</h3>
+      <p>First rank internationally for a deep-learning approach to automated tumor segmentation in CT across multiple cancer sites, with robust segmentation performance.</p>
+    </div>
+    <div class="honor-card">
+      <span class="honor-rank">6th</span>
+      <h3>MLHEP Summer School Competition (2021)</h3>
+      <p>Sixth rank internationally and a Certificate of Excellence for ML models for particle classification and energy prediction on simulated CYGNO detector images.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-head" style="margin-top:2.8rem;">Certifications</h3>
+  <ul class="mini-list">
+    <li><span>AI in Medical Diagnosis — Coursera</span><span>2023</span></li>
+    <li><span>Neural Networks and Deep Learning — Coursera</span><span>2021</span></li>
+    <li><span>IBM Data Science Specialization — Coursera</span><span>2021</span></li>
+  </ul>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <span class="eyebrow">05 / Skills</span>
+    <h2>Technical toolkit</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <h3>Medical Imaging</h3>
+      <p>CT, PET, MRI, CBCT; DICOM I/O, visualization, preprocessing; deformable image registration; automated image segmentation; radiomics and quantitative imaging biomarkers; predictive modeling</p>
+    </div>
+    <div class="skill-card">
+      <h3>Deep Learning &amp; Foundation Models</h3>
+      <p>nnU-Net, U-Net, 3D Conv-LSTM, CNNs, Vision Transformers, GANs; transfer learning, self-supervised learning, fine-tuning foundation models</p>
+    </div>
+    <div class="skill-card">
+      <h3>Statistics &amp; Estimation</h3>
+      <p>Likelihood-based parametric estimation, uncertainty quantification, calibration, bias studies, hypothesis testing, ROC AUC, Cox proportional-hazards modeling</p>
+    </div>
+    <div class="skill-card">
+      <h3>Computing</h3>
+      <p>Python, C++, SQL; PyTorch, TensorFlow, MONAI, scikit-learn, scikit-survival, Hugging Face, Tableau</p>
+    </div>
+    <div class="skill-card">
+      <h3>Clinical &amp; Imaging Tools</h3>
+      <p>MIM, 3D Slicer, ITK-SNAP, ImageJ; linac QA, treatment planning, HDR brachytherapy planning</p>
+    </div>
+    <div class="skill-card">
+      <h3>Scale &amp; Infrastructure</h3>
+      <p>Docker containerization, multi-GPU training, HPC clusters, distributed computing, terabyte-scale data processing, Monte Carlo simulation</p>
+    </div>
+  </div>
+</section>
+
 <section id="education">
   <div class="section-head">
-    <span class="eyebrow">05 / Education</span>
+    <span class="eyebrow">06 / Education</span>
     <h2>Education</h2>
   </div>
   <div class="timeline">
     <div class="timeline-item">
       <span class="timeline-date">SEP 2024 — JUN 2026</span>
-      <h3>Diploma in Medical Physics</h3>
+      <h3>Medical Physics Certificate (CAMPEP-Accredited)</h3>
       <div class="timeline-org">Rutgers University</div>
-      <ul>
-        <li>Coursework in medical imaging, radiological physics and dosimetry, radiation safety, radiation therapy physics, radiobiology, and anatomy &amp; physiology.</li>
-      </ul>
+      <p class="timeline-note">Clinical experience: introductory practicum in clinical medical physics through linear accelerator monthly QA, treatment planning, and HDR brachytherapy cylinder planning.</p>
     </div>
     <div class="timeline-item">
       <span class="timeline-date">2018 — 2023</span>
-      <h3>PhD in Physics</h3>
-      <div class="timeline-org">Indian Institute of Technology Hyderabad / Belle II Collaboration, KEK</div>
+      <h3>PhD in Experimental Particle Physics</h3>
+      <div class="timeline-org">Indian Institute of Technology Hyderabad / Belle II Collaboration, KEK, Japan</div>
+      <p class="timeline-note">Dissertation research on rare-decay searches in an electron–positron collider experiment at KEK, Japan.</p>
     </div>
   </div>
 </section>
 
 <section id="publications">
   <div class="section-head">
-    <span class="eyebrow">06 / Publications</span>
-    <h2>Selected publications &amp; presentations</h2>
+    <span class="eyebrow">07 / Publications</span>
+    <h2>Publications</h2>
   </div>
+
+  <h3 class="sub-head">Medical physics &amp; medical imaging AI</h3>
   <div class="pub-list">
     <div class="pub-item">
-      <p><strong>Nayak, L.</strong> et al. Deep learning-based multimodal imaging biomarkers for early tumor-regression phenotyping towards personalized digital-twin-guided radiotherapy in head and neck cancer.</p>
-      <span class="pub-venue">Manuscript to be submitted</span>
+      <p><strong>Nayak, L.</strong> et al. PanSegLight: A Lightweight nnU-Net for Pan-Cancer CT Segmentation and an Evaluation of a False-Positive-Weighted Tversky Loss.</p>
+      <span class="pub-venue">Lecture Notes in Computer Science Proceedings, Springer Nature · <span class="pub-status">Under review</span></span>
     </div>
     <div class="pub-item">
-      <p><strong>Nayak, L.</strong> et al. Coarse-Spacing nnU-Net with Tversky Loss for Pan-Cancer CT Segmentation.</p>
-      <span class="pub-venue">Manuscript to be submitted</span>
+      <p><strong>Nayak, L.</strong> et al. Mid-Treatment CT Mean Density, Volume, and Mass Changes as Early Response Biomarkers in Head and Neck Cancer Radiotherapy Using AI-Based Deformable Image Registration.</p>
+      <span class="pub-venue">Int. J. Radiation Oncology, Biology, Physics, 126, S297–S298 · <a href="https://doi.org/10.1016/j.ijrobp.2026.06.627" target="_blank" rel="noopener">doi:10.1016/j.ijrobp.2026.06.627</a></span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. (2026). Quantifying Primary and Lymph Node Tumor Volume Reduction and Mass Loss during Radiotherapy.</p>
+      <span class="pub-venue">Medical Physics, 53(10), e70699, p. 442 · <a href="https://doi.org/10.1002/mp.70699" target="_blank" rel="noopener">doi:10.1002/mp.70699</a></span>
     </div>
     <div class="pub-item">
       <p><strong>Nayak, L.</strong> et al. Comparison of AI-Based and ANTs for Longitudinal Deformable Image Registration in Head and Neck Cancer.</p>
       <span class="pub-venue">Medical Physics, 52(10), e70059646–e70059647</span>
     </div>
     <div class="pub-item">
-      <p><strong>Nayak, L.</strong> et al. Mid-Treatment CT Mean Density, Volume, and Mass Changes as Early Response Biomarkers in Head and Neck Cancer Radiotherapy Using AI-Based Deformable Image Registration.</p>
-      <span class="pub-venue">ASTRO Annual Meeting, 2026 — Oral presentation accepted</span>
+      <p><strong>Nayak, L.</strong> et al. Pretreatment FDG uptake is associated with faster early tumor regression during head and neck radiotherapy.</p>
+      <span class="pub-venue"><span class="pub-status">Close to submission</span></span>
     </div>
     <div class="pub-item">
-      <p><strong>Nayak, L.</strong> et al. (2023). Search for B<sub>s</sub> &rarr; ℓ(&mu;, e)&tau; at Belle.</p>
-      <span class="pub-venue">Journal of High Energy Physics 08 (2023) 178</span>
-    </div>
-    <div class="pub-item">
-      <p><strong>Nayak, L.</strong> et al. (2024). Lepton flavor violating &mu; decays with vector leptoquark.</p>
-      <span class="pub-venue">Journal of Physics G 51 055002</span>
+      <p><strong>Nayak, L.</strong> et al. Towards PET-guided adaptive radiotherapy: pre-treatment FDG uptake correlates with tumor volume regression on weekly CBCT in LA-NSCLC.</p>
+      <span class="pub-venue"><span class="pub-status">In preparation</span></span>
     </div>
   </div>
-  <p class="pub-note">Additional peer-reviewed publications: <a href="https://scholar.google.com/citations?user=aCeGqFUAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+  <h3 class="sub-head">Particle physics</h3>
+  <div class="pub-list">
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. (2024). Lepton Flavor Violating &mu; Decays with Vector Leptoquark.</p>
+      <span class="pub-venue">J. Phys. G: Nucl. Part. Phys., 51, 055002 · <a href="https://doi.org/10.1088/1361-6471/ad2471" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong>, S. Nishida, A. Giri (2024). Search for B<sub>s</sub><sup>0</sup> &rarr; &ell;<sup>&mnplus;</sup>&tau;<sup>&plusmn;</sup> (&ell; = e, &mu;) with the Semi-Leptonic Tagging Method at Belle.</p>
+      <span class="pub-venue">Springer Proceedings in Physics, 304, 196–199 · <a href="https://doi.org/10.1007/978-981-97-0289-3_42" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p>V. Vimal Sukhida, <strong>L. Nayak</strong> et al. (2024). Charged Particle Identification with the TOP Detector at Belle II.</p>
+      <span class="pub-venue">Springer Proceedings in Physics, 304, 735–737 · <a href="https://doi.org/10.1007/978-981-97-0289-3_178" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. (2023). Search for B<sub>s</sub> &rarr; &ell;(&mu;, e)&tau; at Belle.</p>
+      <span class="pub-venue">Journal of High Energy Physics, 08 (2023) 178 · <a href="https://doi.org/10.1007/JHEP08(2023)178" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p>S. Choudhury, …, <strong>L. Nayak</strong> et al. (2023). Measurement of the B<sup>+</sup>/B<sup>0</sup> Production Ratio in e<sup>+</sup>e<sup>&minus;</sup> Collisions at the &Upsilon;(4S) Resonance Using B &rarr; J/&psi;(&ell;&ell;)K Decays at Belle.</p>
+      <span class="pub-venue">Physical Review D · <a href="https://doi.org/10.1103/PhysRevD.107.L031102" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong>, S. Nishida, A. Giri (2022). Search for LFV in B<sub>s</sub> Decays.</p>
+      <span class="pub-venue">Springer Proceedings in Physics, 277, 149–153 · <a href="https://doi.org/10.1007/978-981-19-2354-8_27" target="_blank" rel="noopener">doi</a></span>
+    </div>
+    <div class="pub-item">
+      <p>F. Abudin, …, <strong>L. Nayak</strong> et al. (2022). Measurement of the Branching Fraction for the Decay B &rarr; K<sup>*</sup>(892)&ell;<sup>+</sup>&ell;<sup>&minus;</sup> at Belle II.</p>
+      <span class="pub-venue"><a href="https://arxiv.org/abs/2206.05946" target="_blank" rel="noopener">arXiv:2206.05946 [hep-ex]</a></span>
+    </div>
+    <div class="pub-item">
+      <p>S. Choudhury, …, <strong>L. Nayak</strong> et al. (2021). Test of Lepton Flavor Universality and Search for Lepton Flavor Violation in B &rarr; K&ell;&ell; Decays.</p>
+      <span class="pub-venue">Journal of High Energy Physics, 03 (2021) 105 · <a href="https://doi.org/10.1007/JHEP03(2021)105" target="_blank" rel="noopener">doi</a></span>
+    </div>
+  </div>
+  <p class="pub-note">Additional peer-reviewed particle physics publications in Journal of High Energy Physics, Physical Review D, and Physical Review Letters. Full list on <a href="https://scholar.google.com/citations?user=aCeGqFUAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+</section>
+
+<section id="talks">
+  <div class="section-head">
+    <span class="eyebrow">08 / Talks</span>
+    <h2>Talks &amp; posters</h2>
+  </div>
+
+  <h3 class="sub-head">Medical physics</h3>
+  <div class="pub-list">
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Towards PET-guided adaptive radiotherapy: pre-treatment FDG uptake correlates with tumor volume regression on weekly CBCT in LA-NSCLC.</p>
+      <span class="pub-venue">ESTRO 2027 · <span class="pub-status">Submitted</span></span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Mid-Treatment CT Mean Density, Volume, and Mass Changes as Early Response Biomarkers in Head and Neck Cancer Radiotherapy Using AI-Based Deformable Image Registration.</p>
+      <span class="pub-venue">ASTRO Annual Meeting 2026 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Quantifying Primary and Lymph Node Tumor Volume Reduction and Mass Loss During Radiotherapy.</p>
+      <span class="pub-venue">AAPM Annual Meeting 2026 · Poster</span>
+    </div>
+    <div class="pub-item">
+      <p>L. Ebrahimpour, …, <strong>L. Nayak</strong> et al. Evaluation and Failure Analysis of a Foundation Model for Automated Breast Tumor Segmentation on Post-Contrast Breast MRI.</p>
+      <span class="pub-venue">San Antonio Breast Cancer Symposium (SABCS) 2026 · Poster</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Comparison of AI-Based and ANTs for Longitudinal Deformable Image Registration in Head and Neck Cancer.</p>
+      <span class="pub-venue">AAPM Annual Meeting 2025 · Poster</span>
+    </div>
+  </div>
+
+  <h3 class="sub-head">Particle physics</h3>
+  <div class="pub-list">
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Search for Y<sub>b</sub> &rarr; &phi;&eta;<sub>b</sub> at Belle II.</p>
+      <span class="pub-venue">Belle II Group Meeting, KEK, Japan, 2023 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Search for B<sub>s</sub> &rarr; &ell;&tau; with the Semi-Leptonic Tagging Method at Belle.</p>
+      <span class="pub-venue">XXIV DAE-BRNS High Energy Physics Symposium, India, 2022 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Search for B<sub>s</sub> &rarr; &ell;&tau; at Belle.</p>
+      <span class="pub-venue">Belle Group Meeting, KEK, Japan, 2022 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Charged Particle Identification Performance of the TOP Sub-Detector at Belle II.</p>
+      <span class="pub-venue">XXIV DAE-BRNS High Energy Physics Symposium, India, 2022 · Poster</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Lepton Flavor Violation in B<sub>s</sub> Decays.</p>
+      <span class="pub-venue">Belle Group Meeting, KEK, Japan, 2021 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Search for Lepton Flavor Violation in B<sub>s</sub> Decays.</p>
+      <span class="pub-venue">XXIV DAE-BRNS High Energy Physics Symposium, India, 2020 · Oral</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Lepton Identification at Belle II.</p>
+      <span class="pub-venue">XXIV DAE-BRNS High Energy Physics Symposium, India, 2020 · Poster</span>
+    </div>
+    <div class="pub-item">
+      <p><strong>Nayak, L.</strong> et al. Search for Lepton Flavor Violation in B<sub>s</sub> Decays.</p>
+      <span class="pub-venue">Belle Group Meeting, KEK, Japan, 2020 · Oral</span>
+    </div>
+  </div>
 </section>
 
 <section id="contact">
   <div class="section-head">
-    <span class="eyebrow">07 / Contact</span>
+    <span class="eyebrow">09 / Contact</span>
     <h2>Get in touch</h2>
   </div>
-  <p style="color:var(--text-muted); max-width:560px;">Open to AI/ML, data science, and medical-imaging opportunities where large-scale data, deep learning, quantitative modeling, and clinically meaningful AI intersect.</p>
+  <p style="color:var(--text-muted); max-width:560px;">Open to AI/ML, medical physics, and medical-imaging opportunities where deep learning, quantitative modeling, and clinically meaningful AI intersect.</p>
   <div class="contact-grid">
     <a class="btn btn-primary" href="https://www.linkedin.com/in/lopamudra-nayak-phd-3190731ab/" target="_blank" rel="noopener">Connect on LinkedIn</a>
     <a class="btn" href="https://github.com/lophy95" target="_blank" rel="noopener">GitHub</a>
@@ -488,12 +662,10 @@
         let x = i*spacing - spacing;
         let y = j*spacing - spacing;
 
-        // ambient sinusoidal deformation field
         const wave = Math.sin(x*0.01 + t*1.3) * 6 + Math.cos(y*0.013 + t) * 6;
         x += wave * 0.5;
         y += wave * 0.5;
 
-        // mouse-driven local warp (like a registration displacement field)
         const dx = x - mouseX, dy = y - mouseY;
         const dist = Math.sqrt(dx*dx + dy*dy);
         const influence = Math.max(0, 1 - dist / 220);
@@ -506,7 +678,6 @@
       }
     }
 
-    // horizontal lines
     for(let j=0;j<rows;j++){
       ctx.beginPath();
       for(let i=0;i<cols;i++){
@@ -515,7 +686,6 @@
       }
       ctx.stroke();
     }
-    // vertical lines
     for(let i=0;i<cols;i++){
       ctx.beginPath();
       for(let j=0;j<rows;j++){
